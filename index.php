@@ -21,19 +21,9 @@
                     <ul>
                         <li><a href="index.php">inicio</a></li>
                         <li><a href="servicios.php">servicios</a></li>
-                        <li><a href="ofertas.">ofertas</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                categorias
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="categorias1.html" href="#">argentina</a></li>
-                                <li><a class="categorias2.html" href="#">latam</a></li>
-                                <li><a class="categorias3.html" href="#">jujuy</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="redes.html">REDES SOCIALES</a></li>
+                        <li><a href="ofertas.php">ofertas</a></li>
+                        <li><a href="categorias.php">categorias</a></li>
+                        <li><a href="redes.php">REDES SOCIALES</a></li>
                     </ul>
                 </nav>
             </div>

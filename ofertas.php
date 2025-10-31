@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>menu</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="ofertas.css">
 </head>
+
 <body>
     <header>
         <div class="content">
             <div class="menu container">
                 <a href="index.html" class="logo">logo</a>
-                <input type="checkbox" id="menu"/>
+                <input type="checkbox" id="menu" />
                 <label for="menu">
                     <img src="imgenes/imag.png" class="menu-icono" alt="Icono de menú">
                 </label>
@@ -29,4 +31,5 @@
     </header>
     <h1> ofertas </h1>
 </body>
+
 </html>

@@ -110,3 +110,8 @@ h1 {
 .demas {
     background: #F0E68C;
 }
+
+.btn.btn-success {
+    background-color: #FF8C00 ;
+    border-color: #FF8C00 ;
+}

@@ -19,7 +19,7 @@ body {
 
 .content {
     min-height: 80px;
-    background: gray;
+    background: #FF8C00;
     /* Para que el menú no flote fuera del header, el 'content' debe ser el contenedor del menú y no 'menu' directamente */
     position: relative; /* Asegura que los elementos posicionados absolutamente dentro de 'content' se posicionen en relación a este */
 }

@@ -1,6 +1,61 @@
 <?php
-require_once 'componentes/conexion.php';
+// ==========================================================
+// LÓGICA PHP PARA COMENTARIOS Y CONEXIÓN
+// ==========================================================
+
+// 1. Incluir la conexión a la base de datos
+// ASUMIMOS que este archivo define la variable $conexion
+require_once 'componentes/conexion.php'; 
+
+// --- Variables de PRUEBA (AJUSTA ESTO a tu lógica de sesión real) ---
+$nombre_cliente_actual = "Usuario Invitado";
+$id_cliente_actual = 999; 
+$video_id_actual = 1; // Usamos un ID fijo para esta página de detalles
+$error_message = '';
+
+// --- 2. PROCESAR DATOS DEL FORMULARIO ---
+// Usamos 'comentar' como name del botón submit
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentar'])) {
+    
+    // El formulario original tiene name="comment_text"
+    $comentario_texto = $conexion->real_escape_string($_POST['comment_text']); 
+
+    if (!empty($comentario_texto)) {
+        
+        // 3. CONSULTA SQL PARA INSERTAR EL COMENTARIO
+        // Usamos tus nombres de columna: cliente, id_cliente, comentario, fecha_comentario
+        // Agrego 'video_id' si existe en tu tabla; si no, quítalo de la consulta.
+        $sql_insert = "INSERT INTO comentarios (cliente, id_cliente, comentario, fecha_comentario, video_id) 
+                       VALUES ('$nombre_cliente_actual', '$id_cliente_actual', '$comentario_texto', NOW(), '$video_id_actual')";
+        
+        if ($conexion->query($sql_insert) === TRUE) {
+            // Éxito: Redirigir para evitar reenvío del formulario (PRG pattern)
+            header("Location: " . $_SERVER['PHP_SELF']); 
+            exit();
+        } else {
+            $error_message = "Error al guardar el comentario: " . $conexion->error;
+        }
+    }
+}
+
+// --- 4. OBTENER COMENTARIOS PARA MOSTRAR ---
+$comentarios_array = [];
+$total_comentarios = 0;
+
+// Seleccionamos los campos necesarios y filtramos por video_id (si aplica)
+$sql_select = "SELECT cliente, comentario, fecha_comentario FROM comentarios WHERE video_id = '$video_id_actual' ORDER BY fecha_comentario DESC";
+$resultado = $conexion->query($sql_select);
+
+if ($resultado->num_rows > 0) {
+    $total_comentarios = $resultado->num_rows;
+    while($fila = $resultado->fetch_assoc()) {
+        $comentarios_array[] = $fila;
+    }
+}
+
+// Nota: No cerramos la conexión aquí, asumiendo que el archivo de conexión la maneja o la vista la necesita.
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +66,10 @@ require_once 'componentes/conexion.php';
     <link rel="stylesheet" href="detalle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .avatar-sm { width: 40px; height: 40px; object-fit: cover; }
+    </style>
 </head>
 
 <body>
@@ -118,6 +177,77 @@ require_once 'componentes/conexion.php';
                     </div>
                 </div>
             </div>
+
+            <hr class="my-4">
+
+            <section id="comentarios" class="my-5 container">
+                <h3 class="mb-4"><?php echo $total_comentarios; ?> Comentarios</h3>
+                
+                <?php if (!empty($error_message)): ?>
+                    <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                <?php endif; ?>
+
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="d-flex mb-5">
+                    
+                    <img src="https://via.placeholder.com/40/20a8d8/ffffff?text=<?php echo substr($nombre_cliente_actual, 0, 1); ?>" class="rounded-circle avatar-sm me-3"
+                        alt="Tu Avatar" style="width: 40px; height: 40px;">
+
+                    <div class="flex-grow-1">
+                        <div class="mb-2">
+                            <textarea class="form-control" placeholder="Añade un comentario público..." rows="1"
+                                name="comment_text" id="comentario-input-form" required></textarea>
+                            
+                            <input type="hidden" name="nombre_cliente" value="<?php echo htmlspecialchars($nombre_cliente_actual); ?>">
+                            <input type="hidden" name="id_cliente" value="<?php echo $id_cliente_actual; ?>">
+                            <input type="hidden" name="video_id" value="<?php echo $video_id_actual; ?>">
+                        </div>
+
+                        <div class="d-flex justify-content-end collapse" id="comment-form-buttons">
+                            <button class="btn btn-light btn-sm me-2" type="button"
+                                onclick="document.getElementById('comentario-input-form').value=''; document.getElementById('comment-form-buttons').classList.remove('show');">
+                                Cancelar
+                            </button>
+                            <button class="btn btn-primary btn-sm" type="submit" name="comentar">
+                                Comentar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <script>
+                    document.getElementById('comentario-input-form').addEventListener('focus', function () {
+                        document.getElementById('comment-form-buttons').classList.add('show');
+                    });
+                </script>
+
+                <?php if ($total_comentarios > 0): ?>
+                    <?php foreach ($comentarios_array as $comentario): ?>
+                        <div class="comment-item d-flex mb-4">
+                            <img src="https://via.placeholder.com/40/f3f3f3/000000?text=<?php echo substr($comentario['cliente'], 0, 1); ?>" class="rounded-circle avatar-sm me-3"
+                                alt="Avatar" style="width: 40px; height: 40px;">
+
+                            <div class="flex-grow-1">
+                                <div class="mb-1">
+                                    <span class="fw-bold me-2"><?php echo htmlspecialchars($comentario['cliente']); ?></span>
+                                    <small class="text-muted"><?php echo $comentario['fecha_comentario']; ?></small>
+                                </div>
+                                <p class="mb-2"><?php echo nl2br(htmlspecialchars($comentario['comentario'])); ?></p>
+
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-sm text-muted p-0 me-3"><i class="bi bi-hand-thumbs-up"></i></button>
+                                    <span class="text-muted small me-3">0</span>
+                                    <button class="btn btn-sm text-muted p-0 me-3"><i
+                                            class="bi bi-hand-thumbs-down"></i></button>
+                                    <button class="btn btn-sm text-muted p-0 me-3 fw-bold">Responder</button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-muted text-center">Aún no hay comentarios. Sé el primero.</p>
+                <?php endif; ?>
+
+            </section>
 
         </header>
 

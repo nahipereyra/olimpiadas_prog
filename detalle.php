@@ -5,7 +5,7 @@ require_once 'componentes/conexion.php';
 // --- Variables de PRUEBA (AJUSTA ESTO a tu lógica de sesión real) ---
 $nombre_cliente_actual = "Usuario Invitado";
 $id_cliente_actual = 999; 
-$video_id_actual = 1; // Usamos un ID fijo para esta página de detalles
+$id_paquete_actual = 1; // Usamos un ID fijo para esta página de detalles
 $error_message = '';
 
 // --- 2. PROCESAR DATOS DEL FORMULARIO ---
@@ -20,8 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentar'])) {
         // 3. CONSULTA SQL PARA INSERTAR EL COMENTARIO
         // Usamos tus nombres de columna: cliente, id_cliente, comentario, fecha_comentario
         // Agrego 'video_id' si existe en tu tabla; si no, quítalo de la consulta.
-        $sql_insert = "INSERT INTO comentarios (cliente, id_cliente, comentario, fecha_comentario, video_id) 
-                       VALUES ('$nombre_cliente_actual', '$id_cliente_actual', '$comentario_texto', NOW(), '$video_id_actual')";
+        $sql_insert = "INSERT INTO comentarios (cliente, id_cliente, comentario, fecha_comentario, id_paquete) 
+                       VALUES ('$nombre_cliente_actual', '$id_cliente_actual', '$comentario_texto', NOW(), '$id_paquete_actual')";
         
         if ($conexion->query($sql_insert) === TRUE) {
             // Éxito: Redirigir para evitar reenvío del formulario (PRG pattern)
@@ -38,7 +38,7 @@ $comentarios_array = [];
 $total_comentarios = 0;
 
 // Seleccionamos los campos necesarios y filtramos por video_id (si aplica)
-$sql_select = "SELECT cliente, comentario, fecha_comentario FROM comentarios WHERE video_id = '$video_id_actual' ORDER BY fecha_comentario DESC";
+$sql_select = "SELECT cliente, comentario, fecha_comentario FROM comentarios WHERE video_id = '$id_paquete_actual' ORDER BY fecha_comentario DESC";
 $resultado = $conexion->query($sql_select);
 
 if ($resultado->num_rows > 0) {

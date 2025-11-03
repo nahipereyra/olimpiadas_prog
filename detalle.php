@@ -1,10 +1,5 @@
 <?php
-// ==========================================================
-// LÓGICA PHP PARA COMENTARIOS Y CONEXIÓN
-// ==========================================================
 
-// 1. Incluir la conexión a la base de datos
-// ASUMIMOS que este archivo define la variable $conexion
 require_once 'componentes/conexion.php'; 
 
 // --- Variables de PRUEBA (AJUSTA ESTO a tu lógica de sesión real) ---

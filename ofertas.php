@@ -28,8 +28,11 @@
                 </nav>
             </div>
         </div>
+        
     </header>
+
     <h1> ofertas </h1>
+
 </body>
 
 </html>

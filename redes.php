@@ -7,6 +7,7 @@
     <title>menu</title>
     <link rel="stylesheet" href="redes.css">
 </head>
+
 <div class="body">
 
     <body>
@@ -36,10 +37,8 @@
                 Redes Sociales
             </h1>
         </div>
-
-
-
     </body>
+
 </div>
 
 </html>

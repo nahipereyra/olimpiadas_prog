@@ -1,56 +1,15 @@
 <?php
 
-require_once 'componentes/conexion.php'; 
+require_once 'componentes/conexion.php';
+$paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
 
 // --- Variables de PRUEBA (AJUSTA ESTO a tu lógica de sesión real) ---
 $nombre_cliente_actual = "Usuario Invitado";
-$id_cliente_actual = 999; 
+$id_cliente_actual = 999;
 $id_paquete_actual = 1; // Usamos un ID fijo para esta página de detalles
 $error_message = '';
-
-// --- 2. PROCESAR DATOS DEL FORMULARIO ---
-// Usamos 'comentar' como name del botón submit
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentar'])) {
-    
-    // El formulario original tiene name="comment_text"
-    $comentario_texto = $conexion->real_escape_string($_POST['comment_text']); 
-
-    if (!empty($comentario_texto)) {
-        
-        // 3. CONSULTA SQL PARA INSERTAR EL COMENTARIO
-        // Usamos tus nombres de columna: cliente, id_cliente, comentario, fecha_comentario
-        // Agrego 'video_id' si existe en tu tabla; si no, quítalo de la consulta.
-        $sql_insert = "INSERT INTO comentarios (cliente, id_cliente, comentario, fecha_comentario, id_paquete) 
-                       VALUES ('$nombre_cliente_actual', '$id_cliente_actual', '$comentario_texto', NOW(), '$id_paquete_actual')";
-        
-        if ($conexion->query($sql_insert) === TRUE) {
-            // Éxito: Redirigir para evitar reenvío del formulario (PRG pattern)
-            header("Location: " . $_SERVER['PHP_SELF']); 
-            exit();
-        } else {
-            $error_message = "Error al guardar el comentario: " . $conexion->error;
-        }
-    }
-}
-
-// --- 4. OBTENER COMENTARIOS PARA MOSTRAR ---
-$comentarios_array = [];
-$total_comentarios = 0;
-
-// Seleccionamos los campos necesarios y filtramos por video_id (si aplica)
-$sql_select = "SELECT cliente, comentario, fecha_comentario FROM comentarios WHERE video_id = '$id_paquete_actual' ORDER BY fecha_comentario DESC";
-$resultado = $conexion->query($sql_select);
-
-if ($resultado->num_rows > 0) {
-    $total_comentarios = $resultado->num_rows;
-    while($fila = $resultado->fetch_assoc()) {
-        $comentarios_array[] = $fila;
-    }
-}
-
-// Nota: No cerramos la conexión aquí, asumiendo que el archivo de conexión la maneja o la vista la necesita.
 ?>
-
+<!-- menu -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +22,11 @@ if ($resultado->num_rows > 0) {
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        .avatar-sm { width: 40px; height: 40px; object-fit: cover; }
+        .avatar-sm {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -89,11 +52,12 @@ if ($resultado->num_rows > 0) {
                     </nav>
                 </div>
             </div>
-
+<!-- fin del menu -->
+ <!-- carrucel -->
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="paisa.jpeg" class="d-block w-100" alt="...">
+                        <img src="<?= $paquete['ur_imagen'] ?>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
                         <img src="paisaje.png" class="d-block w-100" alt="...">
@@ -113,7 +77,8 @@ if ($resultado->num_rows > 0) {
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
+<!-- fin del carrucel-->
+<!-- inicio de detalle -->
             <div class="card">
                 <div class="card-body">
                     descripcion del paquete.
@@ -177,22 +142,23 @@ if ($resultado->num_rows > 0) {
 
             <section id="comentarios" class="my-5 container">
                 <h3 class="mb-4"><?php echo $total_comentarios; ?> Comentarios</h3>
-                
+
                 <?php if (!empty($error_message)): ?>
                     <div class="alert alert-danger"><?php echo $error_message; ?></div>
                 <?php endif; ?>
 
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="d-flex mb-5">
-                    
-                    <img src="https://via.placeholder.com/40/20a8d8/ffffff?text=<?php echo substr($nombre_cliente_actual, 0, 1); ?>" class="rounded-circle avatar-sm me-3"
-                        alt="Tu Avatar" style="width: 40px; height: 40px;">
+
+                    <img src="https://via.placeholder.com/40/20a8d8/ffffff?text=<?php echo substr($nombre_cliente_actual, 0, 1); ?>"
+                        class="rounded-circle avatar-sm me-3" alt="Tu Avatar" style="width: 40px; height: 40px;">
 
                     <div class="flex-grow-1">
                         <div class="mb-2">
                             <textarea class="form-control" placeholder="Añade un comentario público..." rows="1"
                                 name="comment_text" id="comentario-input-form" required></textarea>
-                            
-                            <input type="hidden" name="nombre_cliente" value="<?php echo htmlspecialchars($nombre_cliente_actual); ?>">
+
+                            <input type="hidden" name="nombre_cliente"
+                                value="<?php echo htmlspecialchars($nombre_cliente_actual); ?>">
                             <input type="hidden" name="id_cliente" value="<?php echo $id_cliente_actual; ?>">
                             <input type="hidden" name="video_id" value="<?php echo $video_id_actual; ?>">
                         </div>
@@ -218,8 +184,8 @@ if ($resultado->num_rows > 0) {
                 <?php if ($total_comentarios > 0): ?>
                     <?php foreach ($comentarios_array as $comentario): ?>
                         <div class="comment-item d-flex mb-4">
-                            <img src="https://via.placeholder.com/40/f3f3f3/000000?text=<?php echo substr($comentario['cliente'], 0, 1); ?>" class="rounded-circle avatar-sm me-3"
-                                alt="Avatar" style="width: 40px; height: 40px;">
+                            <img src="https://via.placeholder.com/40/f3f3f3/000000?text=<?php echo substr($comentario['cliente'], 0, 1); ?>"
+                                class="rounded-circle avatar-sm me-3" alt="Avatar" style="width: 40px; height: 40px;">
 
                             <div class="flex-grow-1">
                                 <div class="mb-1">
@@ -244,6 +210,48 @@ if ($resultado->num_rows > 0) {
 
             </section>
 
+            <?php
+            // --- 2. PROCESAR DATOS DEL FORMULARIO ---
+            // Usamos 'comentar' como name del botón submit
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentar'])) {
+
+                // El formulario original tiene name="comment_text"
+                $comentario_texto = $conexion->real_escape_string($_POST['comment_text']);
+
+                if (!empty($comentario_texto)) {
+
+                    // 3. CONSULTA SQL PARA INSERTAR EL COMENTARIO
+                    // Usamos tus nombres de columna: cliente, id_cliente, comentario, fecha_comentario
+                    // Agrego 'video_id' si existe en tu tabla; si no, quítalo de la consulta.
+                    $sql_insert = "INSERT INTO comentarios (cliente, id_cliente, comentario, fecha_comentario, id_paquete)
+            VALUES ('$nombre_cliente_actual', '$id_cliente_actual', '$comentario_texto', NOW(), '$id_paquete_actual')";
+
+                    if ($conexion->query($sql_insert) === TRUE) {
+                        // Éxito: Redirigir para evitar reenvío del formulario (PRG pattern)
+                        header("Location: " . $_SERVER['PHP_SELF']);
+                        exit();
+                    } else {
+                        $error_message = "Error al guardar el comentario: " . $conexion->error;
+                    }
+                }
+            }
+
+            // --- 4. OBTENER COMENTARIOS PARA MOSTRAR ---
+            $comentarios_array = [];
+            $total_comentarios = 0;
+
+            // Seleccionamos los campos necesarios y filtramos por video_id (si aplica)
+            $sql_select = "SELECT cliente, comentario, fecha_comentario FROM comentarios WHERE video_id =
+            '$id_paquete_actual' ORDER BY fecha_comentario DESC";
+            $resultado = $conexion->query($sql_select);
+
+            if ($resultado->num_rows > 0) {
+                $total_comentarios = $resultado->num_rows;
+                while ($fila = $resultado->fetch_assoc()) {
+                    $comentarios_array[] = $fila;
+                }
+            }
+            ?>
         </header>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

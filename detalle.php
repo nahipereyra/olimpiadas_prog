@@ -1,6 +1,7 @@
 <?php
 
 require_once 'componentes/conexion.php';
+$paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
 
 // --- Variables de PRUEBA (AJUSTA ESTO a tu lógica de sesión real) ---
 $nombre_cliente_actual = "Usuario Invitado";

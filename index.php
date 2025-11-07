@@ -55,7 +55,7 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
                                 <p class="card-text">
                                     Salida: <?= $paquete['fecha_inicio'] ?><br>
                                     Regreso: <?= $paquete['fecha_fin'] ?><br>
-                                    limite: <?= $paquete['fecha_limite'] ?>
+                                    limite: <?= $paquete['fecha_limite'] ?><br>
                                     precio:
                                 </p>
                             </div>

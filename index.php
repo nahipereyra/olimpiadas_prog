@@ -47,15 +47,16 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
                     <div class="col">
                         <div class="card h-100 shadow-sm">
                             <div class="card-title text-center p-3">
-                                <h3><?= $paquete['destino'] ?></h3>
+                                <h3><?= $paquete['titulo_lugar'] ?></h3>
                             </div>
                             <div class="card-body">
-                                <img class="card-img-top mb-3" src="<?= $paquete['ur_caracterización'] ?>"
-                                    alt="Imagen del paquete a <?= $paquete['destino'] ?>">
+                                <img class="card-img-top mb-3" src="<?= $paquete['ur_imagen'] ?>"
+                                    alt="Imagen del paquete a <?= $paquete['titulo_lugar'] ?>">
                                 <p class="card-text">
-                                    Salida: <?= $paquete['fecha_salida'] ?><br>
-                                    Regreso: <?= $paquete['fecha_regreso'] ?><br>
-                                    Promoción: <?= $paquete['promos'] ?>
+                                    Salida: <?= $paquete['fecha_inicio'] ?><br>
+                                    Regreso: <?= $paquete['fecha_fin'] ?><br>
+                                    limite: <?= $paquete['fecha_limite'] ?>
+                                    precio:
                                 </p>
                             </div>
 

@@ -8,7 +8,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background:#F0E68C;
+    background: #F0E68C;
 }
 
 .container {
@@ -76,6 +76,44 @@ h1 {
     text-align: center; /* Centrar el título */
 }
 
-.caja{
-    font-family: Lucida;
+@media(max-width: 991px) {
+    .content {
+        min-height: 70px; /* Ajuste para pantallas más pequeñas */
+    }
+
+    .menu {
+        padding: 0 20px; /* Añadir padding para que el contenido no se pegue a los bordes */
+        height: 70px;
+    }
+
+    .menu label {
+        display: initial; /* Muestra el icono del menú en pantallas pequeñas */
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%; /* Asegura que el menú desplegable esté justo debajo del header */
+        left: 0;
+        right: 0;
+        /* =======background: #FF8C00; */
+        display: none; /* Oculto por defecto */
+        z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: block; /* Muestra el menú cuando el checkbox está marcado */
+    }
+}
+
+.cartaviaje {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100px;
+    height:200px;
 }

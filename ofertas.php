@@ -8,33 +8,33 @@
     <link rel="stylesheet" href="css/ofertas.css">
 </head>
 
-<div class="bodyy">
-    <body>
-        <header>
-            <div class="content">
-                <div class="menu container">
-                    <a href="index.html" class="logo">logo</a>
-                    <input type="checkbox" id="menu" />
-                    <label for="menu">
-                        <img src="imgenes/imag.png" class="menu-icono" alt="Icono de menú">
-                    </label>
-                    <nav class="navbar">
-                        <ul>
-                            <li><a href="index.php">inicio</a></li>
-                            <li><a href="servicios.php">servicios</a></li>
-                            <li><a href="ofertas.php">ofertas</a></li>
-                            <li><a href="categorias.php">categorias</a></li>
-                            <li><a href="redes.php">REDES SOCIALES</a></li>
-                        </ul>
-                    </nav>
-                </div>
+
+<body>
+    <header>
+        <div class="content">
+            <div class="menu container">
+                <a href="index.html" class="logo">logo</a>
+                <input type="checkbox" id="menu" />
+                <label for="menu">
+                    <img src="imgenes/imag.png" class="menu-icono" alt="Icono de menú">
+                </label>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="index.php">inicio</a></li>
+                        <li><a href="servicios.php">servicios</a></li>
+                        <li><a href="ofertas.php">ofertas</a></li>
+                        <li><a href="categorias.php">categorias</a></li>
+                        <li><a href="redes.php">REDES SOCIALES</a></li>
+                    </ul>
+                </nav>
             </div>
-            
-        </header>
+        </div>
 
-        <h1> ofertas </h1>
+    </header>
 
-    </body>
-</div>
+    <h1> ofertas </h1>
+
+</body>
+
 
 </html>

@@ -76,8 +76,8 @@ $error_message = '';
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-<!-- fin del carrucel -->
- 
+<!-- fin del carrucel-->
+<!-- inicio de detalle -->
             <div class="card">
                 <div class="card-body">
                     descripcion del paquete.

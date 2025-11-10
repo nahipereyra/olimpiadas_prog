@@ -27,10 +27,11 @@ require_once 'componentes/conexion.php';
                 header('location:index.php');
                 exit;
 
-            }else{
+            } else{
                 $errores .= "<div class='alert alert-dqanger'>contraseña incorrecta</div>"
+                
             }
-            }
+        }
     }
 }
 ?>

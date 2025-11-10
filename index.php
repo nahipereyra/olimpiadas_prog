@@ -1,6 +1,7 @@
 <?php
 require_once 'componentes/conexion.php';
 $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +38,13 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
         </div>
     </header>
 
+    <?php
+    if ($_SESSION ['userid']){
+        echo 'hola' . $_SESSION['nombre'];
+    }else{
+        echo '<a href="login.php">iniciar sesion</a>';
+    }
+    ?>
     <div class="demas">
         <main class="flex-shrink-0 container my-4">
 

@@ -28,7 +28,7 @@ require_once 'componentes/conexion.php';
                 exit;
 
             } else{
-                $errores .= "<div class='alert alert-dqanger'>contraseña incorrecta</div>"
+                $errores .= "<div class='alert alert-dqanger'>contraseña incorrecta</div>";
                 
             }
         }
@@ -52,7 +52,7 @@ require_once 'componentes/conexion.php';
         <label for="contraseña">contraseña</label>
         <input type="password" name="contraseña" id="contraseña">
 
-        <input type="sumit" value="ingresar" >
+        <input type="submit" value="ingresar" >
 
     </form>
 </body>

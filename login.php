@@ -15,7 +15,7 @@ require_once 'componentes/conexion.php';
 
         $usuario= $frase->get_result()->fetch_assoc();
 
-        if(usuario){
+        if($usuario){
             if(password_verify($contraseña, $usuario['contraseña'])){
                 session_start();
                 $_SESSION['userid'] = $ususario['id_usuario'];

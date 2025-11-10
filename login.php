@@ -1,5 +1,6 @@
 <?php
 require_once 'componentes/conexion.php';
+require_once 'componentes/componente-formulario.php';
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
         $errores = '';
         $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
@@ -46,13 +47,7 @@ require_once 'componentes/conexion.php';
 </head>
 <body>
     <form method="POST" action="login.php">
-        <label for="nombre-usuario">nombre del usuario</label>
-        <input type="email" name="nombre-usuario" id="nombre-usuario">
-
-        <label for="contraseña">contraseña</label>
-        <input type="password" name="contraseña" id="contraseña">
-
-        <input type="submit" value="ingresar" >
+        
     </form>
     <div>
         <p>

@@ -53,7 +53,11 @@ require_once 'componentes/conexion.php';
         <input type="password" name="contraseña" id="contraseña">
 
         <input type="submit" value="ingresar" >
-
     </form>
+    <div>
+        <p>
+            no tienes un usuario? registrate: <a href="registro.php">aqui</a>
+        </p>
+    </div>
 </body>
 </html>

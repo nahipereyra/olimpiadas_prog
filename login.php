@@ -47,7 +47,7 @@ require_once 'componentes/componente-formulario.php';
 </head>
 <body>
     <form method="POST" action="login.php">
-        
+        <?php require_once 'componentes/componente-formulario.php'?>
     </form>
     <div>
         <p>

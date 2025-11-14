@@ -9,7 +9,7 @@ if ($id_paquete > 0) {
         SELECT *
         FROM paquete
         WHERE id_paquete = $id_paquete 
-        AND (estado = 'disponible' OR estado = 'proximamente')
+        AND (estado = '1' OR estado = '0')
     ")->fetch_assoc();
 
     if (!$paquete) {

@@ -11,6 +11,10 @@ body {
     background: #F0E68C;
 }
 
+header {
+    background-color: transparent; 
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -140,3 +144,4 @@ h1 {
     margin: 20px;
     padding: 20px;
 }
+

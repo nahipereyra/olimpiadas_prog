@@ -41,6 +41,7 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
     <?php
     if ($_SESSION ['userid']){
         echo 'hola' . $_SESSION['nombre'];
+        echo '<a href="logout.php"> cerrar sesion</a>';
     }else{
         echo '<a href="login.php">iniciar sesion</a>';
     }

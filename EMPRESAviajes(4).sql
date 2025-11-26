@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-11-2025 a las 18:55:28
+-- Tiempo de generación: 26-11-2025 a las 15:34:08
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -179,12 +179,12 @@ CREATE TABLE `USUARIOS` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `correo` varchar(155) NOT NULL,
-  `teléfono` varchar(20) NOT NULL,
-  `id_carrito` int(11) NOT NULL,
-  `id_paqueteviaje` int(11) NOT NULL,
-  `id_pago` int(11) NOT NULL,
+  `teléfono` varchar(20) DEFAULT NULL,
+  `id_carrito` int(11) DEFAULT NULL,
+  `id_paqueteviaje` int(11) DEFAULT NULL,
+  `id_pago` int(11) DEFAULT NULL,
   `contraseña` varchar(255) NOT NULL,
-  `rol` varchar(50) NOT NULL DEFAULT 'cliente'
+  `rol` varchar(50) DEFAULT 'cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

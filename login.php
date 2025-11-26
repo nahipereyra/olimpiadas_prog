@@ -1,22 +1,26 @@
 <?php
 require_once 'componentes/conexion.php';
 require_once 'componentes/componente-formulario.php';
+$paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
+
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
         $errores = '';
-        $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
+        $nombre_usuario = $conexion->real_escape_string($_POST['nombre-usuario']);
+        $correo = $conexion->real_escape_string($_POST['correo']);
         $contraseña = $conexion->real_escape_string($_POST['contraseña']);
 
     if(empty($correo) || empty($contraseña)){
         $errores .= ">div class='alert alert-danger'>por favor, completa todos los campos</div>";
 
     }else{
-        $frase = $conexion->prepare("SELECT * FROM clientes WHERE clientes.correo = ?");
+        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuaris.correo = ?");
         $frase-> bind_param('s',$correo);
         $frase-> execute();
 
         $usuario= $frase->get_result()->fetch_assoc();
 
         if($usuario){
+
             if(password_verify($contraseña, $usuario['contraseña'])){
                 session_start();
                 $_SESSION['userid'] = $ususario['id_usuario'];
@@ -36,6 +40,7 @@ require_once 'componentes/componente-formulario.php';
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

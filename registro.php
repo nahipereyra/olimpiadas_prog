@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
      $errores = '';
         $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
         $contraseña = $conexion->real_escape_string($_POST['contraseña']);
-}
+
     if(empty($correo) || empty($contraseña)){
         $errores .= ">div class='alert alert-danger'>por favor, completa todos los campos</div>";
 
@@ -29,6 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
     }else{
         $errores = "<div class='alert alert-danger'>hubo un error. intentalo mas tarde</div>";
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
 </head>
 <body>
     <form method="POST" action="registro.php">
-
+        <?php require_once 'componentes/componente-formulario.php'?>
     </form>
+
 </body>
 </html>

@@ -12,8 +12,8 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
     if(empty($correo) || empty($contraseña)){
         $errores .= ">div class='alert alert-danger'>por favor, completa todos los campos</div>";
 
-    }else{
-        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuaris.correo = ?");
+    } else{
+        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuario.correo = ?");
         $frase-> bind_param('s',$correo);
         $frase-> execute();
 

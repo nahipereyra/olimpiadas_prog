@@ -1,8 +1,5 @@
-<label for="nombre-usuario">nombre</label>
-<input type="text" name="nombre-usuario" id="nombre-usuario">
-
 <label for="correo">email del usuario</label>
-<input type="email" name="correo" id="correo">
+<input type="email" name="nombre-usuario" id="correo">
 
 <label for="contraseña">contraseña</label>
 <input type="password" name="contraseña" id="contraseña">
@@ -11,7 +8,7 @@
 
 
 <?php
-require_once 'componentes/conexion.php';
+/*require_once 'componentes/conexion.php';
 
 // Recuperar el ID del paquete desde la URL
 $id_paquete = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -50,4 +47,4 @@ if ($id_paquete > 0) {
     echo "<div class='alert alert-danger mt-5 text-center'>ID de paquete inválido.</div>";
     exit;
 }
-?>
+*/?>

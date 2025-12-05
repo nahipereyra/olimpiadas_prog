@@ -86,64 +86,11 @@ if ($id_paquete != null && $id_paquete >0) {
             <div class="card">
                 <div class="card-body">
                    <?= $paquete['ur_caracterización']?>
+                   <br>
+                   <br>  el servicio que ofrece este paquete es (<?= $paquete['id_servicio']?>)
+                                la fecha de salida es (<?= $paquete['fecha_inicio']?>) y la fecha de retorno es (<?= $paquete['fecha_fin']?>).
                 </div>
             </div>
-
-            <div class="caja">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                servicios del paquete
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                el servicio de transporte que te ofrece este paquete es () tambien incluye esta estadia
-                                ()
-                                la fecha de salida es () y la fecha de retorno es ().
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                categorias disponibles
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                este paquete incluye estas categorias de viaje () no hay cambios en las categorias. Solo
-                                la
-                                que ve disponible.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                pagos disponibles
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                el metodo de pago que puede utilazar es () solo estan disponibles estos metodos. El
-                                valor
-                                individual por persona, mas el costo adicional por los servicios es de ()
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="my-4">
-            
         </header>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

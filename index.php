@@ -60,18 +60,18 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
                             </div>
                             <div class="card-body">
                                 <img class="card-img-top mb-3" src="<?= $paquete['ur_imagen'] ?>"
-                                    alt="Imagen del paquete a <?= $paquete['titulo_lugar'] ?>">
+                                    alt="">
                                 <p class="card-text">
                                     Salida: <?= $paquete['fecha_inicio'] ?><br>
                                     Regreso: <?= $paquete['fecha_fin'] ?><br>
                                     limite: <?= $paquete['fecha_limite'] ?><br>
-                                    precio:
+                                    precio: <?= $paquete['precio'] ?><br>
                                 </p>
                             </div>
 
                             <div class="boton">
                                 <div class="card-footer bg-transparent border-0 mt-3">
-                                    <a href="detalle.php?id=<?= $paquete['id_paquete'] ?>"
+                                    <a href="detalle.php?id=<?= $paquete['id_paqueteviaje'] ?>"
                                         class="btn btn-success w-100 fw-bold rounded-pill">
                                         ¡RESERVA AHORA!
                                     </a>

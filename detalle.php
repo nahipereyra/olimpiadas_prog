@@ -1,28 +1,18 @@
 <?php
+session_start();
 require_once 'componentes/conexion.php';
+$paquetes = $conexion->query("SELECT * FROM PAQUETEVIAJE");
 $id_paquete = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id_paquete > 0) {
-
-    // Consultar el paquete
     $paquete = $conexion->query("
         SELECT *
-        FROM paquete
-        WHERE id_paquete = $id_paquete 
-        AND (estado = '1' OR estado = '0')
+        FROM PAQUETEVIAJE
+        WHERE id_paqueteviaje = $id_paquete 
+        AND estado = '1';
     ")->fetch_assoc();
-
-    if (!$paquete) {
-        echo "<div class='alert alert-danger text-center mt-5'>Paquete no encontrado o no disponible.</div>";
-        exit;
-    }
-    $servicios = $conexion->query("
-       SELECT *
-       FROM servicio JOIN paquete_servicio ON servicio.id_servicio = paquete_servicio.id_paquete
-       Where paquete_servicio.id_paquete = $id_paquete;
-    ");
 } else {
-    echo "<div class='alert alert-danger mt-5 text-center'>ID de paquete inválido.</div>";
+    echo "<div class='alert alert-danger mt-5 text-center'>ID de paquete invalido<div/>";
     exit;
 }
 ?>
@@ -91,7 +81,7 @@ if ($id_paquete > 0) {
             </div>
             <div class="card">
                 <div class="card-body">
-                    descripcion del paquete.
+                   <?= $paquete['ur_caracterización']?>
                 </div>
             </div>
 

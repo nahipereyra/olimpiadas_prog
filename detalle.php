@@ -4,16 +4,20 @@ require_once 'componentes/conexion.php';
 $paquetes = $conexion->query("SELECT * FROM PAQUETEVIAJE");
 $id_paquete = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if ($id_paquete > 0) {
+if ($id_paquete != null && $id_paquete >0) {
     $paquete = $conexion->query("
         SELECT *
         FROM PAQUETEVIAJE
         WHERE id_paqueteviaje = $id_paquete 
         AND estado = '1';
     ")->fetch_assoc();
-} else {
-    echo "<div class='alert alert-danger mt-5 text-center'>ID de paquete invalido<div/>";
+}if (!$paquete){
+    echo "<div class='alert alert-dqanger'>paqute no encotrado o no disponible</div>";
     exit;
+} else {
+    $servicios = $conexion -> query("
+    SELECT * FROM SERVICIOS JOIN PAQUETE_SERVICIO ON SERVICIOS.id_servicio = PAQUETE_SERVICIO.id_servicio WHERE PAQUETE_SERVICIO.id_paqueteviaje = $id_paquete;"
+    );
 }
 ?>
 <!DOCTYPE html>

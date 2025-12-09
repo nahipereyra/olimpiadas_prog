@@ -1,43 +1,57 @@
 <?php
-require_once 'componentes/conexion.php';
-require_once 'componentes/componente-formulario.php';
-$paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
+// 1. INCLUIR LA CONEXIÓN PRIMERO
+require_once 'componentes/conexion.php'; 
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
-        $errores = '';
-        $nombre_usuario = $conexion->real_escape_string($_POST['nombre-usuario']);
-        $correo = $conexion->real_escape_string($_POST['correo']);
-        $contraseña = $conexion->real_escape_string($_POST['contraseña']);
+// 2. INICIAR LA SESIÓN
+session_start(); 
+
+// 3. INCLUIR COMPONENTE
+require_once 'componentes/componente-formulario.php';
+
+// Eliminamos la consulta innecesaria a PAQUETEVIAJE
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
+    $errores = '';
+    
+    // CORRECCIÓN: Usamos 'correo' del formulario
+    $correo = trim($_POST['correo'] ?? ''); 
+    $contraseña = $_POST['contraseña'] ?? ''; 
 
     if(empty($correo) || empty($contraseña)){
-        $errores .= ">div class='alert alert-danger'>por favor, completa todos los campos</div>";
-
+        // Corregido el nombre de la clase de alerta
+        $errores .= "<div class='alert alert-danger'>Por favor, completa todos los campos.</div>";
     } else{
-        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuario.correo = ?");
-        $frase-> bind_param('s',$correo);
-        $frase-> execute();
-
-        $usuario= $frase->get_result()->fetch_assoc();
+        // Sentencia Preparada para seguridad y eficiencia
+        // CORRECCIÓN: Usamos 'correo' como nombre de columna (asumiendo ese es el nombre correcto)
+        $frase = $conexion->prepare("SELECT id_usuario, nombre, contraseña, rol FROM usuarios WHERE correo = ?"); // ¡Añadir el ; aquí!
+        $frase->bind_param('s', $correo);
+        $frase->execute();
+        $usuario = $frase->get_result()->fetch_assoc();
+        $frase->close();
 
         if($usuario){
-
             if(password_verify($contraseña, $usuario['contraseña'])){
-                session_start();
-                $_SESSION['userid'] = $ususario['id_usuario'];
+                // CORRECCIÓN: Usar $usuario en lugar de $ususario
+                $_SESSION['userid'] = $usuario['id_usuario'];
                 $_SESSION['nombre'] = $usuario['nombre'];
                 $_SESSION['rol'] = $usuario['rol'];
 
                 $conexion->close();
 
-                header('location:index.php');
+                // CORRECCIÓN: Usar sintaxis correcta para header
+                header('Location: index.php');
                 exit;
-
             } else{
-                $errores .= "<div class='alert alert-dqanger'>contraseña incorrecta</div>";
-                
+                $errores .= "<div class='alert alert-danger'>Contraseña incorrecta.</div>";
             }
+        } else {
+             $errores .= "<div class='alert alert-danger'>Usuario no encontrado.</div>";
         }
     }
+}
+
+if (!empty($errores)) {
+    echo $errores;
 }
 ?>
 
@@ -48,7 +62,7 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>ajgencia de viajes-login</title>
+    <title>Agencia de Viajes - Login</title>
 </head>
 <body>
     <form method="POST" action="login.php">
@@ -56,7 +70,7 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
     </form>
     <div>
         <p>
-            no tienes un usuario? registrate: <a href="registro.php">aqui</a>
+            ¿No tienes un usuario? Regístrate: <a href="registro.php">aquí</a>
         </p>
     </div>
 </body>

@@ -39,8 +39,8 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
     </header>
 
     <?php
-    if ($_SESSION ['userid']){
-        echo 'hola' . $_SESSION['nombre'];
+    if (isset($_SESSION['userid'])){ // Verifica si la clave 'userid' existe
+        echo 'Hola ' . $_SESSION['nombre'];
         echo '<a href="logout.php"> cerrar sesion</a>';
     }else{
         echo '<a href="login.php">iniciar sesion</a>';

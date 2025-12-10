@@ -59,7 +59,7 @@ $paquetes = $conexion->query("SELECT * FROM EMPRESAviajes.PAQUETEVIAJE");
                                 <h3><?= $paquete['titulo_lugar'] ?></h3>
                             </div>
                             <div class="card-body">
-                                <img class="card-img-top mb-3" src="<?= $paquete['ur_imagen'] ?>"
+                                <img class="card-img-top mb-3" src="imagenes/paisa.jpeg"
                                     alt="">
                                 <p class="card-text">
                                     Salida: <?= $paquete['fecha_inicio'] ?><br>

@@ -1,29 +1,18 @@
 <?php
-// 1. INCLUIR LA CONEXIÓN PRIMERO
-require_once 'componentes/conexion.php'; 
+session_start();
 
-// 2. INICIAR LA SESIÓN
-session_start(); 
+require_once 'componentes/conexion.php';
 
-// 3. INCLUIR COMPONENTE
-require_once 'componentes/componente-formulario.php';
-
-// Eliminamos la consulta innecesaria a PAQUETEVIAJE
-
-if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     $errores = '';
-    
-    // CORRECCIÓN: Usamos 'correo' del formulario
-    $correo = trim($_POST['correo'] ?? ''); 
-    $contraseña = $_POST['contraseña'] ?? ''; 
+    $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
+    $contraseña = $conexion->real_escape_string($_POST['contraseña']);
 
-    if(empty($correo) || empty($contraseña)){
-        // Corregido el nombre de la clase de alerta
-        $errores .= "<div class='alert alert-danger'>Por favor, completa todos los campos.</div>";
-    } else{
-        // Sentencia Preparada para seguridad y eficiencia
-        // CORRECCIÓN: Usamos 'correo' como nombre de columna (asumiendo ese es el nombre correcto)
-        $frase = $conexion->prepare("SELECT id_usuario, nombre, contraseña, rol FROM usuarios WHERE correo = ?"); // ¡Añadir el ; aquí!
+    if (empty($correo) || empty($contraseña)) {
+        $errores .= ">div class='alert alert-danger'>por favor, completa todos los campos</div>";
+
+    } else {
+        $frase = $conexion->prepare("SELECT * FROM USUARIOS WHERE correo = ?"); 
         $frase->bind_param('s', $correo);
         $frase->execute();
         $usuario = $frase->get_result()->fetch_assoc();
@@ -31,14 +20,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])){
 
         if($usuario){
             if(password_verify($contraseña, $usuario['contraseña'])){
-                // CORRECCIÓN: Usar $usuario en lugar de $ususario
                 $_SESSION['userid'] = $usuario['id_usuario'];
                 $_SESSION['nombre'] = $usuario['nombre'];
                 $_SESSION['rol'] = $usuario['rol'];
 
                 $conexion->close();
-
-                // CORRECCIÓN: Usar sintaxis correcta para header
                 header('Location: index.php');
                 exit;
             } else{

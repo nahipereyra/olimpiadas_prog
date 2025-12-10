@@ -89,6 +89,7 @@ if ($id_paquete != null && $id_paquete >0) {
                    <br>
                    <br>  el servicio que ofrece este paquete es (<?= $paquete['id_servicio']?>)
                                 la fecha de salida es (<?= $paquete['fecha_inicio']?>) y la fecha de retorno es (<?= $paquete['fecha_fin']?>).
+
                 </div>
 
             </div>

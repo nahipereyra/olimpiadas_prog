@@ -104,6 +104,11 @@ h1 {
     object-fit: cover; 
 } 
 
+/* no anda */
+.card-body {
+    background: #F0E68C;
+}
+
 
 
 @media(max-width: 991px) {
@@ -139,9 +144,8 @@ h1 {
     }
 }
 
-.caja {
-    border: 5px ;
-    margin: 20px;
-    padding: 20px;
+.btn.btn-success,
+.btn.btn-success:hover {
+    background-color: #FF8C00 ;
+    border-color: #FF8C00 ;
 }
-

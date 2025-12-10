@@ -105,10 +105,24 @@ h1 {
 } 
 
 /* no anda */
-.card-body {
-    background: #F0E68C;
+.detalle-card {
+    background-color: #F0E68C !important;
 }
 
+.detalle-card .card-body {
+    background-color: transparent !important;
+}
+
+/* m,lm */
+.btn-registro {
+    background-color: #FF8C00 !important;
+}
+
+
+.btn-registro:hover {
+    background-color: #e67e00 !important;
+    border-color: #e67e00 !important;
+}
 
 
 @media(max-width: 991px) {
@@ -144,8 +158,4 @@ h1 {
     }
 }
 
-.btn.btn-success,
-.btn.btn-success:hover {
-    background-color: #FF8C00 ;
-    border-color: #FF8C00 ;
-}
+

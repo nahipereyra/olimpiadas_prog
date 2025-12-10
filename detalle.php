@@ -90,7 +90,16 @@ if ($id_paquete != null && $id_paquete >0) {
                    <br>  el servicio que ofrece este paquete es (<?= $paquete['id_servicio']?>)
                                 la fecha de salida es (<?= $paquete['fecha_inicio']?>) y la fecha de retorno es (<?= $paquete['fecha_fin']?>).
                 </div>
+
             </div>
+            <div class="boton">
+                                <div class="card-footer bg-transparent border-0 mt-3">
+                                    <a href="registro.php?id=<?= $paquete['id_paqueteviaje'] ?>"
+                                        class="btn btn-success w-100 fw-bold rounded-pill">
+                                        ¡REGISTRATE Y COMPRA YA!
+                                    </a>
+                                </div>
+                            </div>
         </header>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

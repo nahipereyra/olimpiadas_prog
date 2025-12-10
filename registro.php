@@ -46,35 +46,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
 </head>
 
 <body>
+
     <body class="d-flex flex-column h-100">
-    <header>
-        <div class="content">
-            <div class="menu container">
-                <a href="index.html" class="logo">logo</a>
-                <input type="checkbox" id="menu" />
-                <label for="menu">
-                    <img src="imagenes/imag.png" class="menu-icono" alt="">
-                </label>
-                <nav class="navbar">
-                    <ul>
-                        <li><a href="index.php">inicio</a></li>
-                        <li><a href="servicios.php">servicios</a></li>
-                        <li><a href="ofertas.php">ofertas</a></li>
-                        <li><a href="categorias.php">categorias</a></li>
-                        <li><a href="redes.php">REDES SOCIALES</a></li>
-                    </ul>
-                </nav>
+        <header>
+            <div class="content">
+                <div class="menu container">
+                    <a href="index.html" class="logo">logo</a>
+                    <input type="checkbox" id="menu" />
+                    <label for="menu">
+                        <img src="imagenes/imag.png" class="menu-icono" alt="">
+                    </label>
+                    <nav class="navbar">
+                        <ul>
+                            <li><a href="index.php">inicio</a></li>
+                            <li><a href="servicios.php">servicios</a></li>
+                            <li><a href="ofertas.php">ofertas</a></li>
+                            <li><a href="categorias.php">categorias</a></li>
+                            <li><a href="redes.php">REDES SOCIALES</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
+        </header>
+        <div class="formulario">
+            <form method="POST" action="registro.php">
+                <label for="correo">Nombre:</label>
+                <input type="text" name="nombre" id="nombre">
+
+                <?php require_once 'componentes/componente-formulario.php' ?>
+            </form>
         </div>
-    </header>
-
-    <form method="POST" action="registro.php">
-        <label for="correo">Nombre:</label>
-        <input type="text" name="nombre" id="nombre">
-
-        <?php require_once 'componentes/componente-formulario.php' ?>
-    </form>
-
-</body>
+    </body>
 
 </html>

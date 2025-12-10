@@ -54,7 +54,7 @@ if (!empty($errores)) {
 </head>
 
 <body class="d-flex flex-column h-100">
-    <header>
+    <header class="todo">
         <div class="content">
             <div class="menu container">
                 <a href="index.html" class="logo">logo</a>
@@ -78,6 +78,7 @@ if (!empty($errores)) {
                 <?php require_once 'componentes/componente-formulario.php' ?>
             </form>
             <div>
+                <br>
                 <p>
                     ¿No tienes un usuario? Regístrate: <a href="registro.php">aquí</a>
                 </p>

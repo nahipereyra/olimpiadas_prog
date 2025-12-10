@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Agregado para alinear el contenido dentro del container */
+    padding: 0 20px; /* Añadir un poco de padding horizontal para evitar que el contenido toque los bordes en pantallas pequeñas */
+}
+
+.content {
+    min-height: 80px;
+    background: #FF8C00;
+    /* Para que el menú no flote fuera del header, el 'content' debe ser el contenedor del menú y no 'menu' directamente */
+    position: relative; /* Asegura que los elementos posicionados absolutamente dentro de 'content' se posicionen en relación a este */
+}
+
+.menu {
+    /* Eliminados top, left, right ya que 'content' ahora es el contenedor del menú */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px; /* Asegura que el menú ocupe la altura de 'content' */
+}
+
+.logo {
+    font-size: 25px;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+}
+
+.menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px;
+    color: azure;
+    display: block;
+    font-weight: bold;
+}
+
+.menu .navbar ul li a:hover {
+    color: antiquewhite;
+}
+
+#menu {
+    display: none;
+}
+
+.menu-icono {
+    width: 25px;
+}
+
+.menu label {
+    cursor: pointer;
+    display: none; /* Por defecto no se muestra */
+}
+
+h1 {
+    /* Ajustado para que el h1 esté debajo del header y con un margen más consistente */
+    margin-top: 20px; /* Espacio superior después del header */
+    text-align: center; /* Centrar el título */
+}
+
+@media(max-width: 991px) {
+    .content {
+        min-height: 70px; /* Ajuste para pantallas más pequeñas */
+    }
+
+    .menu {
+        padding: 0 20px; /* Añadir padding para que el contenido no se pegue a los bordes */
+        height: 70px;
+    }
+
+    .menu label {
+        display: initial; /* Muestra el icono del menú en pantallas pequeñas */
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%; /* Asegura que el menú desplegable esté justo debajo del header */
+        left: 0;
+        right: 0;
+        background: #FF8C00; 
+        display: none; /* Oculto por defecto */
+        z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: block; /* Muestra el menú cuando el checkbox está marcado */
+    }
+}

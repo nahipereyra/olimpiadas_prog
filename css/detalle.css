@@ -104,25 +104,25 @@ h1 {
     object-fit: cover; 
 } 
 
-/* no anda */
-.detalle-card {
+/* Card */
+.detalle-card.card {
     background-color: #F0E68C !important;
+    border: none !important;
 }
 
-.detalle-card .card-body {
-    background-color: transparent !important;
-}
-
-/* m,lm */
-.btn-registro {
+/* Botón */
+a.btn.btn-registro {
     background-color: #FF8C00 !important;
+    color: white !important;
+    border-color: #FF8C00 !important;
 }
 
-
-.btn-registro:hover {
+a.btn.btn-registro:hover {
     background-color: #e67e00 !important;
+    color: white !important;
     border-color: #e67e00 !important;
 }
+
 
 
 @media(max-width: 991px) {

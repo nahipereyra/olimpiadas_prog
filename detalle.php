@@ -83,11 +83,13 @@ if ($id_paquete != null && $id_paquete >0) {
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div class="card detalle-card"> <div class="card-body">
-                   <?= $paquete['ur_caracterización']?>
+            <div class="card detalle-card"> 
+                <div class="card-body">
+                    <?= $paquete['ur_caracterización']?>
                    <br>
                    <br>  el servicio que ofrece este paquete es (<?= $paquete['id_servicio']?>)
                                 la fecha de salida es (<?= $paquete['fecha_inicio']?>) y la fecha de retorno es (<?= $paquete['fecha_fin']?>).
+                </div>
             </div>
 
             <div class="boton">

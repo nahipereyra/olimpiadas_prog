@@ -107,3 +107,8 @@ h1 {
         display: block; /* Muestra el menú cuando el checkbox está marcado */
     }
 }
+
+.formulario{
+    padding-top: 10px;
+    text-align: center;
+}
